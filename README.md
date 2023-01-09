@@ -2,6 +2,7 @@
 
 ## Run the project
 Using IntelliJ and directly run the mlserviceApplication main function should run the service.
+The default port is 8080 which can be modified in application.properties.
 
 To test the service, using the following request
 ```
