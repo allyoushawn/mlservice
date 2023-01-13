@@ -1,12 +1,15 @@
-# ML Service
-This repository is the api gateway for ml services like sentiment analysis and machine translation, etc. 
+# ML Service API Gateway
+This repository is the api gateway for ml services like sentiment analysis and machine translation, etc. We implement a 
+REST API gateway with Java and Spring framework. 
+
+
 The mentioned ml services are separated in other repositories.
 - [Sentiment Analysis](https://github.com/allyoushawn/sentiment_analysis_model_service)
 
 
 ## Run the project
-Using IntelliJ and directly run the mlserviceApplication main function should run the service.
-The default port is 8081 which can be modified in application.properties.
+With IntelliJ and directly run the mlserviceApplication main function.
+The default port is 8081 which can be modified in [application.properties](https://github.com/allyoushawn/mlservice/blob/main/application.properties).
 
 Currently, we have set up a sentiment analysis service. 
 Follow the instruction in [sentiment analysis repository](https://github.com/allyoushawn/sentiment_analysis_model_service)
