@@ -1,14 +1,23 @@
 # ML Service
+This repository is the api gateway for ml services like sentiment analysis and machine translation, etc. 
+The mentioned ml services are separated in other repositories.
+- [Sentiment Analysis](https://github.com/allyoushawn/sentiment_analysis_model_service)
+
 
 ## Run the project
 Using IntelliJ and directly run the mlserviceApplication main function should run the service.
 The default port is 8081 which can be modified in application.properties.
 
-Currently, we have set up a sentiment analysis service. To test the service, using the following request
+Currently, we have set up a sentiment analysis service. 
+Follow the instruction in [sentiment analysis repository](https://github.com/allyoushawn/sentiment_analysis_model_service)
+to set up and run the service.
+
+
+To test the ml service, using the following request in terminal:
 ```
 curl -X POST localhost:8081/sentimentAnalysis -H 'Content-type:application/json' -d '{"requestId": "request_id_123", "content": "This is a good day"}'
 ```
-The response should be the following
+The response should be the following:
 ```
 {"status":"200","requestId":"request_id_123","content":"{\"request\":{\"text\":\"This is a good day\"},\"response\":{\"word_num\":5,\"sentiment_score\":3.0}}"}
 ```
