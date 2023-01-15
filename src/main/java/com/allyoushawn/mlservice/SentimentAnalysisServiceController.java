@@ -1,14 +1,15 @@
 package com.allyoushawn.mlservice;
 
+import com.allyoushawn.mlservice.proto.sentimentanalysis.SentimentAnalysisServiceResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -21,6 +22,7 @@ public class SentimentAnalysisServiceController {
     private static final Logger log = LoggerFactory.getLogger(SentimentAnalysisServiceController.class);
     private static final String POST_URL = "http://127.0.0.1:4460/sentiment_analysis";
     private static final CloseableHttpClient httpClient = HttpClients.createDefault();
+    private static final ObjectMapper mapper = new ObjectMapper();
     @PostMapping("/sentimentAnalysis")
     MLServiceResponse processSentimentAnalysisRequest(@RequestBody MLServiceRequest request) throws IOException {
         log.info("In processSentimentAnalysisRequest");
@@ -40,21 +42,11 @@ public class SentimentAnalysisServiceController {
 
         System.out.println("POST Response Status:: "
                 + httpResponse.getStatusLine().getStatusCode());
+        String responseString = EntityUtils.toString(httpResponse.getEntity());
+        System.out.println("responseString: " + responseString);
+        SentimentAnalysisServiceResponse response = mapper.readValue(responseString, SentimentAnalysisServiceResponse.class);
+        System.out.println(response.getResponse());
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(
-                httpResponse.getEntity().getContent()));
-
-        String inputLine;
-        StringBuffer response = new StringBuffer();
-
-        while ((inputLine = reader.readLine()) != null) {
-            response.append(inputLine);
-        }
-        reader.close();
-
-        // print result
-        System.out.println(response.toString());
-
-        return new MLServiceResponse("200", request.getRequestId(), response.toString());
+        return new MLServiceResponse("200", request.getRequestId(), response.getResponse().getSentimentScore());
     }
 }
