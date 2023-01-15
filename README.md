@@ -25,6 +25,20 @@ The response should be the following:
 {"status":"200","requestId":"request_id_123","content":"{\"request\":{\"text\":\"This is a good day\"},\"response\":{\"word_num\":5,\"sentiment_score\":3.0}}"}
 ```
 
+## Docker
+Build with Docker
+```
+docker build -t mlservice:base --target base -f deployment/Dockerfile .
+```
+Run with Docker
+```
+docker run --name mlservice_local -it -p 8081:8081 mlservice:base
+```
+
+Stop
+```
+docker container stop mlservice_local && docker container rm mlservice_local
+```
 ## Configs
 The API gateway for ml services. Using [Spring initializer](https://start.spring.io) for initializing.
 * Project: Gradle-Groovy
