@@ -5,10 +5,6 @@ import lombok.Data;
 
 @Data
 public class SentimentAnalysisModelRequest {
+    @JsonProperty("text")
     private String text;
-
-    private SentimentAnalysisModelRequest(@JsonProperty("text") String text){
-        // For mapper of SentimentAnalysisController to parse the response from sentiment analysis model service
-        this.text = text;
-    }
 }

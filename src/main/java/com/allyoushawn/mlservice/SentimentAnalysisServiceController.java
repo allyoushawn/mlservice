@@ -46,7 +46,7 @@ public class SentimentAnalysisServiceController {
         String responseString = EntityUtils.toString(httpResponse.getEntity());
         System.out.println("responseString: " + responseString);
         SentimentAnalysisServiceResponse response = mapper.readValue(responseString, SentimentAnalysisServiceResponse.class);
-        System.out.println(response.getResponse());
+        System.out.println(response);
 
         return new MLServiceResponse("200", request.getRequestId(), response.getResponse().getSentimentScore());
     }

@@ -5,8 +5,6 @@ import lombok.Data;
 
 @Data
 public class SentimentAnalysisModelResponse {
-    @JsonProperty("request")
-    private SentimentAnalysisModelRequest request;
     @JsonProperty("word_num")
     private String wordNum;
     @JsonProperty("sentiment_score")
