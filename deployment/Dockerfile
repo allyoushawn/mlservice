@@ -6,6 +6,7 @@ ENV SERVICE_NAME $SERVICE_NAME
 
 COPY ./src /$SERVICE_NAME/src
 COPY ./gradle /$SERVICE_NAME/gradle
+COPY ./application-docker.properties /$SERVICE_NAME/application-docker.properties
 COPY ./application.properties /$SERVICE_NAME/application.properties
 COPY ./build.gradle /$SERVICE_NAME/build.gradle
 COPY ./gradlew /$SERVICE_NAME/gradlew
@@ -13,11 +14,11 @@ COPY ./gradlew.bat /$SERVICE_NAME/gradlew.bat
 COPY ./settings.gradle /$SERVICE_NAME/settings.gradle
 
 RUN cd $SERVICE_NAME && \
-    ./gradlew clean build
+    ./gradlew --stacktrace clean build
 
 
 CMD cd /$SERVICE_NAME && \
-    java -jar build/libs/mlservice-1.0.jar
+    java -Dspring.profiles.active=docker -jar build/libs/mlservice-1.0.jar
 
 
 

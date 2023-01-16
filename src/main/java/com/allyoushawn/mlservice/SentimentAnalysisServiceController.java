@@ -5,6 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,13 +24,16 @@ import org.apache.http.entity.StringEntity;
 @RestController
 public class SentimentAnalysisServiceController {
     private static final Logger log = LoggerFactory.getLogger(SentimentAnalysisServiceController.class);
-    //private static final String POST_URL = "http://127.0.0.1:4460/sentiment_analysis";
-    private static final String POST_URL = "http://microservice_local:4460/sentiment_analysis";
+
+    @Value("${sentiment_analysis_post_url}")
+    private String POST_URL;
     private static final CloseableHttpClient httpClient = HttpClients.createDefault();
     private static final ObjectMapper mapper = new ObjectMapper();
+
     @PostMapping("/sentimentAnalysis")
     MLServiceResponse processSentimentAnalysisRequest(@RequestBody MLServiceRequest request) throws IOException {
         log.info("In processSentimentAnalysisRequest");
+        log.info("POST_URL: " + POST_URL);
 
         HttpPost httpPost = new HttpPost(POST_URL);
         httpPost.addHeader("Content-Type", "application/json");
