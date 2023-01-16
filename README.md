@@ -25,17 +25,40 @@ The response should be the following:
 {"status":"200","requestId":"request_id_123","content":"{\"request\":{\"text\":\"This is a good day\"},\"response\":{\"word_num\":5,\"sentiment_score\":3.0}}"}
 ```
 
-## Docker
-Build with Docker
+## Run the Gateway with Docker
+To communicate with other containers, we have to put these containers into a user-defined bridge network.
+We will use a user-defined bridge network named <em>allyoushawn-net</em> as an example.
+Check out the [tutorial](https://www.tutorialworks.com/container-networking/) for more information.
+
+Create the bridge network with the following
+```
+docker network create allyoushawn-net
+```
+
+Build image with Docker
 ```
 docker build -t mlservice:base --target base -f deployment/Dockerfile .
 ```
-Run with Docker
+Run with Docker, while using <em>--net</em> argument to put the container into the network.
 ```
-docker run --name mlservice_local -it -p 8081:8081 mlservice:base
+docker run --name mlservice_local -it -p 8081:8081 --net=allyoushawn-net mlservice:base
 ```
 
-Stop
+Similarly, we have to make sure other containers we need to communicate with are put into the network, like
+```
+docker run --name microservice_local -it -p 4460:4460 --net=allyoushawn-net microservice:prod
+```
+
+We also have to make sure we are using the correct hostname in our code for communication.
+For example, in <em>SentimentAnalysisServiceController.java</em>, the POST_URL has to be the following,
+where <em>microservice_local:4460</em> represents the target container's name and port. 
+```
+private static final String POST_URL = "http://microservice_local:4460/sentiment_analysis";
+```
+
+We are working on making the code less hard-coded.
+
+Finally, to stop and remove the container.
 ```
 docker container stop mlservice_local && docker container rm mlservice_local
 ```

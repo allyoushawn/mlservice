@@ -20,7 +20,8 @@ import org.apache.http.entity.StringEntity;
 @RestController
 public class SentimentAnalysisServiceController {
     private static final Logger log = LoggerFactory.getLogger(SentimentAnalysisServiceController.class);
-    private static final String POST_URL = "http://127.0.0.1:4460/sentiment_analysis";
+    //private static final String POST_URL = "http://127.0.0.1:4460/sentiment_analysis";
+    private static final String POST_URL = "http://microservice_local:4460/sentiment_analysis";
     private static final CloseableHttpClient httpClient = HttpClients.createDefault();
     private static final ObjectMapper mapper = new ObjectMapper();
     @PostMapping("/sentimentAnalysis")
