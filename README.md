@@ -6,7 +6,8 @@ REST API gateway with Java and Spring framework.
 The mentioned ml services are separated in other repositories.
 - [Sentiment Analysis](https://github.com/allyoushawn/sentiment_analysis_model_service)
 
-
+We also implement a front-end service that 
+could take users' requests from browsers.[[GitHubRepo]](https://github.com/allyoushawn/mlservicefrontend)
 ## Run the project
 With IntelliJ and directly run the mlserviceApplication main function.
 The default port is 8081 which can be modified in [application.properties](https://github.com/allyoushawn/mlservice/blob/main/application.properties).
