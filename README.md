@@ -47,7 +47,7 @@ docker run --name mlservice_local -it -p 8081:8081 --net=allyoushawn-net mlservi
 
 Similarly, we have to make sure other containers we need to communicate with are put into the network, like
 ```
-docker run --name microservice_local -it -p 4460:4460 --net=allyoushawn-net microservice:prod
+docker run --name sentiment_analysis_model_service_local -it -p 4460:4460 --net=allyoushawn-net sentiment_analysis_model_service:prod
 ```
 
 We also have to make sure we are using the correct hostname in our code for communication.
