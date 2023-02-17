@@ -19,11 +19,11 @@ to set up and run the service.
 
 To test the ml service, using the following request in terminal:
 ```
-curl -X POST localhost:8081/sentimentAnalysis -H 'Content-type:application/json' -d '{"requestId": "request_id_123", "content": "This is a good day"}'
+curl -X POST localhost:8081/sentimentAnalysis -H 'Content-type:application/json' -d '{"requestId": "request_id_123", "content": "This is very good."}'
 ```
 The response should be the following:
 ```
-{"status":"200","requestId":"request_id_123","content":"{\"request\":{\"text\":\"This is a good day\"},\"response\":{\"word_num\":5,\"sentiment_score\":3.0}}"}
+{"status":"200","requestId":"request_id_123","content":"{\"request\":{\"text\":\"This is very good.\"},\"response\":{\"word_num\":5,\"sentiment_score\":3.0}}"}
 ```
 
 ## Run the Gateway with Docker
