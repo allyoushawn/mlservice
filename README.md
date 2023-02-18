@@ -54,15 +54,15 @@ We also have to make sure we are using the correct hostname in our code for comm
 For example, in <em>SentimentAnalysisServiceController.java</em>, the POST_URL has to be the following,
 where <em>microservice_local:4460</em> represents the target container's name and port. 
 ```
-private static final String POST_URL = "http://microservice_local:4460/sentiment_analysis";
+private static final String POST_URL = "http://sentiment_analysis_model_service_local:4460/sentiment_analysis";
 ```
-
-We are working on making the code less hard-coded.
+The hostname used for docker should be specified in <em>application-docker.properties</em>.
 
 Finally, to stop and remove the container.
 ```
 docker container stop mlservice_local && docker container rm mlservice_local
 ```
+
 ## Configs
 The API gateway for ml services. Using [Spring initializer](https://start.spring.io) for initializing.
 * Project: Gradle-Groovy
