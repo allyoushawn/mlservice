@@ -53,7 +53,7 @@ docker run --name sentiment_analysis_model_service_local -it -p 4460:4460 --net=
 
 We also have to make sure we are using the correct hostname in our code for communication.
 For example, in [MLServiceController.java](https://github.com/allyoushawn/mlservice/blob/main/src/main/java/com/allyoushawn/mlservice/MLServiceController.java), the POST_URL has to be the following,
-where <em>microservice_local:4460</em> represents the target container's name and port. 
+where <em>sentiment_analysis_model_service_local:4460</em> represents the target container's name and port. 
 ```
 private static final String POST_URL = "http://sentiment_analysis_model_service_local:4460/sentiment_analysis";
 ```
