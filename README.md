@@ -52,12 +52,13 @@ docker run --name sentiment_analysis_model_service_local -it -p 4460:4460 --net=
 ```
 
 We also have to make sure we are using the correct hostname in our code for communication.
-For example, in [MLServiceController.java](https://github.com/allyoushawn/mlservice/blob/main/src/main/java/com/allyoushawn/mlservice/MLServiceController.java), the POST_URL has to be the following,
-where <em>sentiment_analysis_model_service_local:4460</em> represents the target container's name and port. 
+For example, in [MLServiceController.java](https://github.com/allyoushawn/mlservice/blob/main/src/main/java/com/allyoushawn/mlservice/MLServiceController.java), the SENTIMENT_ANALYSIS_POST_URL has to be the something like <em>sentiment_analysis_model_service_local:4460/sentiment_analysis</em>.  `sentiment_analysis_model_service_local:4460` represents the target container's name and port. 
+
+The following segment in the code enables us to dynamically set up the endpoint through <em>application.properties</em>. The hostname used for docker should be specified in <em>application-docker.properties</em>.
 ```
-private static final String POST_URL = "http://sentiment_analysis_model_service_local:4460/sentiment_analysis";
+@Value("${sentiment_analysis_post_url}")
+private String SENTIMENT_ANALYSIS_POST_URL;
 ```
-The hostname used for docker should be specified in <em>application-docker.properties</em>.
 
 Finally, to stop and remove the container.
 ```
