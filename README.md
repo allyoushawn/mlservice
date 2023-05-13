@@ -4,7 +4,8 @@ REST API gateway with Java and Spring framework.
 
 
 The mentioned ml services are separated in other repositories.
-- [Sentiment Analysis](https://github.com/allyoushawn/sentiment_analysis_model_service)
+- [Sentiment Analysis](https://github.com/allyoushawn/ml_model_service/tree/main/sentiment_analysis_model_service)
+- [Machine Translation](https://github.com/allyoushawn/ml_model_service/tree/main/mt_model_service)
 
 We also implement a front-end service that 
 could take users' requests from browsers.[[GitHubRepo]](https://github.com/allyoushawn/mlservicefrontend)
